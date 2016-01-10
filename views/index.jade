@@ -1,0 +1,165 @@
+doctype html
+html(lang='en')
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no')
+    title DawChart
+    // Scripts
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='js/materialize.js')
+    script(src='js/init.js')
+    script(src='js/index.js')
+    // CSS
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    link(href='css/materialize.css', type='text/css', rel='stylesheet', media='screen,projection')
+    link(href='css/style.css', type='text/css', rel='stylesheet', media='screen,projection')
+  body
+    // Modal Login Structure
+    #login.modal.bottom-sheet
+      .modal-content
+        h5.header.center.teal-text.text-lighten-2 Login
+        form.col.s12
+          .row
+            .input-field.col.s3.offset-s4
+              i.material-icons.prefix email
+              input#email.validate(type='email')
+              label(for='icon_prefix', data-error='wrong email') Email
+          .row
+            .input-field.col.s3.offset-s4
+              i.material-icons.prefix lock
+              input#password.validate(type='password')
+              label(for='password') Password
+            div
+              a.modal-action.modal-close.waves-effect.waves-light.btn(href='#!') Login
+    // Modal Signup Structure
+    #signup.modal.bottom-sheet
+      .modal-content
+        h5.header.center.teal-text.text-lighten-2 Sign Up
+        .row
+          form.col.s12
+            .row
+              .input-field.col.s4
+                input#first_name.validate(placeholder='Placeholder', type='text')
+                label(for='first_name') First Name
+              .input-field.col.s4
+                input#last_name.validate(type='text')
+                label(for='last_name') Last Name
+            .row
+              .input-field.col.s4
+                input#email.validate(type='email')
+                label(for='email') Email
+              .input-field.col.s4
+                input#password.validate(type='password')
+                label(for='password') Password
+              .col.s4
+                a.modal-action.modal-close.waves-effect.waves-light.btn(href='#!') Sign Up
+    .navbar-fixed
+      // Nav Menu
+      nav.grey.darken-2(role='navigation')
+        .nav-wrapper
+          a#logo-container.brand-logo.roboto-bold.cyan-text.text-accent-4(href='#') DawChart
+          ul.right.hide-on-med-and-down
+            // Modal trigger Login - Sign Up
+            a.waves-effect.cyan-text.text-accent-4.btn-flat.modal-trigger(href='#login') Login
+            a.waves-effect.cyan-text.text-accent-4.btn-flat.modal-trigger(href='#signup') Sign Up
+          ul#nav-mobile.side-nav
+            li
+              a(href='#') Log in
+            li
+              a(href='#') Sign Up
+          a.button-collapse(href='#', data-activates='nav-mobile')
+            i.material-icons menu
+    #index-banner.parallax-container
+      .section.no-pad-bot
+        .container
+          br
+          br
+          h1.header.center.teal-text.text-lighten-2 Draw your Charts
+          .row.center
+            h5.header.col.s12.light
+              | With DrawChart you can draw beautiful charts in colaboration with your partners in real-time
+          .row.center
+            a#download-button.btn-large.waves-effect.waves-light.teal.lighten-1(href='http://materializecss.com/getting-started.html') Get Started
+          br
+          br
+      .parallax
+        img(src='/images/background1.jpg', alt='Unsplashed background img 1')
+    .container
+      .section
+        // Icon Section
+        .row
+          .col.s12.m4
+            .icon-block
+              h2.center.brown-text
+                i.material-icons flash_on
+              h5.center Speeds up your draws
+              p.light The fastest way to create charts ...
+          .col.s12.m4
+            .icon-block
+              h2.center.brown-text
+                i.material-icons group
+              h5.center Collaborative
+              p.light With our real-time ...
+          .col.s12.m4
+            .icon-block
+              h2.center.brown-text
+                i.material-icons settings
+              h5.center Easy to work with
+              p.light
+                | We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.
+    .parallax-container.valign-wrapper
+      .section.no-pad-bot
+        .container
+          .row.center
+            h5.header.col.s12.light A modern responsive front-end framework based on Material Design
+      .parallax
+        img(src='/images/background2.jpg', alt='Unsplashed background img 2')
+    .container
+      .section
+        .row
+          .col.s12.center
+            h3
+              i.mdi-content-send.brown-text
+            h4 Contact Us
+            p.left-align.light
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+    .parallax-container.valign-wrapper
+      .section.no-pad-bot
+        .container
+          .row.center
+            h5.header.col.s12.light A modern responsive front-end framework based on Material Design
+      .parallax
+        img(src='/images/background3.jpg', alt='Unsplashed background img 3')
+    footer.page-footer.grey.darken-2
+      .container
+        .row
+          .col.l6.s12
+            h5.white-text Company Bio
+            p.grey-text.text-lighten-4
+              | We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.
+          .col.l3.s12
+            h5.white-text Settings
+            ul
+              li
+                a.white-text(href='#!') Link 1
+              li
+                a.white-text(href='#!') Link 2
+              li
+                a.white-text(href='#!') Link 3
+              li
+                a.white-text(href='#!') Link 4
+          .col.l3.s12
+            h5.white-text Connect
+            ul
+              li
+                a.white-text(href='#!') Link 1
+              li
+                a.white-text(href='#!') Link 2
+              li
+                a.white-text(href='#!') Link 3
+              li
+                a.white-text(href='#!') Link 4
+      .footer-copyright
+        .container
+          | Made by
+          a.brown-text.text-lighten-3(href='http://materializecss.com') Cristian Peña
