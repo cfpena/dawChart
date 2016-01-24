@@ -44,8 +44,8 @@ module.exports.connections = {
     adapter: 'sails-mysql',
     host: 'localhost',
     user: 'root',
-    password: '1234',
-    database: 'DawChart'
+    password: 'root',
+    database: 'dawChart'
   },
 
   /***************************************************************************

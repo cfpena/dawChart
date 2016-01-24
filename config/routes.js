@@ -49,7 +49,13 @@ module.exports.routes = {
 
   'get /workarea': {
     view: 'workarea'
-  }
+  },
+
+  'get /dashboard':{
+    view: 'dashboard'
+  },
+
+  '/users' : 'UserController.list',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

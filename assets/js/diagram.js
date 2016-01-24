@@ -1,3 +1,16 @@
+$(document).ready(function(){
+
+
+      $("#save").click(save);
+
+  });
+
+function save(){
+  alert(JSON.stringify(graph.toJSON()));
+
+}
+
+
 var graph = new joint.dia.Graph();
 
 var paper = new joint.dia.Paper({

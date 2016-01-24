@@ -1,25 +1,25 @@
 doctype
 html( lang="es")
-  head
-    title DawChart
-    meta( charset='utf-8' )
-    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
-    meta( name='viewport', content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" )
+head
+  title DawChart
+  meta( charset='utf-8' )
+  meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+  meta( name='viewport', content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" )
 
-    //JavaScript
-    script( src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
-    script( src = "js/dashboard.js")
-    script( src = "js/materialize.js")
-    script( src = "js/init.js")
-    block scripts
+  //JavaScript
+  script( src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+  script( src = "js/dashboard.js")
+  script( src = "js/materialize.js")
+  script( src = "js/init.js")
+  block scripts
 
 
-    //css
-    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
-    link(href="styles/materialize.css", type="text/css", rel="stylesheet", media="screen,projection")
-    link(href="styles/style.css", type="text/css", rel="stylesheet", media="screen,projection")
-    link(rel="stylesheet", type="text/css", href="styles/joint.min.css")
-    block styles
+  //css
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+  link(href="style/materialize.css", type="text/css", rel="stylesheet", media="screen,projection")
+  link(href="style/style.css", type="text/css", rel="stylesheet", media="screen,projection")
+  link(rel="stylesheet", type="text/css", href="style/joint.min.css")
+  block styles
 
   body
     //Dropdown Profile
@@ -39,7 +39,7 @@ html( lang="es")
       li
         a(href="#") Load..
       li
-        a(href="#") Save
+        a#save(href="#") Save
       li
         a(href="#") Download
 
