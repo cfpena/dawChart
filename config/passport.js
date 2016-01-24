@@ -38,8 +38,8 @@ module.exports.passport = {
     protocol: 'oauth2',
     strategy: require('passport-github').Strategy,
     options: {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret'
+      clientID: '06c0e7d57e820ad0de55',
+      clientSecret: 'a0ebf00678e6541f95fb88622c4344417a85e88d'
     }
   },
 
@@ -50,7 +50,8 @@ module.exports.passport = {
     options: {
       clientID: '892603514191908',
       clientSecret: '7fd8ddf27151bb9cc44d05da3fb30c52',
-      scope: ['email'] /* email is necessary for login behavior */
+      scope:['email']
+       /* email is necessary for login behavior */
     }
   },
 
@@ -59,8 +60,10 @@ module.exports.passport = {
     protocol: 'oauth2',
     strategy: require('passport-google-oauth').OAuth2Strategy,
     options: {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret'
+      clientID: '44410448354-g2r58jt8h54m1lp66i466cb4mmnp68si.apps.googleusercontent.com',
+      clientSecret: '71xI9sAveszGX4KWQQ_6cQgf',
+      callbackURL: "http://127.0.0.1:1337/auth/google/callback",
+      scope: ['email']
     }
   },
 

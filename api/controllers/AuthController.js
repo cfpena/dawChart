@@ -53,6 +53,8 @@ var AuthController = {
         providers : providers
       , errors    : req.flash('error')
       });
+    }else{
+      res.redirect('/workarea');
     }
   },
 

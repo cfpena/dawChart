@@ -1,4 +1,4 @@
-extends ./layout
+extends ./layout.jade
 
 block scripts
   // JavaScript
@@ -11,13 +11,12 @@ block scripts
 block styles
   // CSS
   link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
-  link(href='style/materialize.css', type='text/css', rel='stylesheet', media='screen,projection')
-  link(href='style/style.css', type='text/css', rel='stylesheet', media='screen,projection')
-  link(rel='stylesheet', type='text/css', href='style/joint.min.css')
-  link(rel='stylesheet', type='text/css', href='style/diagram.css')
+  link(href='styles/materialize.css', type='text/css', rel='stylesheet', media='screen,projection')
+  link(href='styles/style.css', type='text/css', rel='stylesheet', media='screen,projection')
+  link(rel='stylesheet', type='text/css', href='styles/joint.min.css')
+  link(rel='stylesheet', type='text/css', href='styles/diagram.css')
 
 block content
-
   .navbar-fixed
     nav.lime.lighten-2.z-depth-3
       .nav-wrapper
