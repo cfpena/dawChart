@@ -51,17 +51,14 @@ module.exports.routes = {
     view: 'workarea'
   },
 
-  '/dashboard':{
-    view: 'dashboard',
-    controller: 'DiagramController',
-    action: 'list',
-  },
+  'get /dashboard': 'DiagramController.list',
 
   '/getUserId' : 'DiagramController.get_user',
 
   '/saveDiagram': 'DiagramController.saveDiagram',
   '/loadDiagram' : 'DiagramController.loadDiagram',
   '/diagramList' : 'DiagramController.list',
+  '/load' : 'DiagramController.load',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
