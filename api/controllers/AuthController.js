@@ -78,7 +78,7 @@ var AuthController = {
     // mark the user as logged out for auth purposes
     req.session.authenticated = false;
 
-    res.redirect('/login');
+    res.redirect('/');
   },
 
   /**
@@ -190,7 +190,31 @@ var AuthController = {
    */
   disconnect: function (req, res) {
     passport.disconnect(req, res);
-  }
+  },
+
+  loginEspol: function(req, res) {
+    var passport = require('passport');
+    var soap = require('soap');
+    var url = 'https://ws.espol.edu.ec/saac/wsandroid.asmx?WSDL';
+    var username = req.param('username');
+    var password = req.param('password');
+    console.log(username);
+    console.log(password);
+    soap.createClient(url,function(err,client){
+      client.autenticacion(
+        {authUser: username, authContrasenia: password},
+        function(err,result){
+          console.log(result.autenticacionResult);
+          if (result.autenticacionResult){
+            req.session.authenticated = true
+            return res.redirect('/');
+          }else{
+            alert("Error");
+          }
+          // return res.json({resultado: result});
+        });
+    });
+  },
 };
 
 module.exports = AuthController;

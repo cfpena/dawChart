@@ -62,7 +62,7 @@ module.exports.passport = {
     options: {
       clientID: '44410448354-g2r58jt8h54m1lp66i466cb4mmnp68si.apps.googleusercontent.com',
       clientSecret: '71xI9sAveszGX4KWQQ_6cQgf',
-      callbackURL: "http://127.0.0.1:1337/auth/google/callback",
+      callbackURL: "http://localhost:1337/auth/google/callback",
       scope: ['email']
     }
   },
