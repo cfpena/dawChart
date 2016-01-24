@@ -9,7 +9,11 @@ html(lang='en')
     script(src='js/materialize.js')
     script(src='js/init.js')
     script(src='js/index.js')
+    script(src='js/sweet-alert.js')
+    script(src='swal-forms.js')
     // CSS
+    link(href='styles/sweet-alert.css', rel='stylesheet')
+    link(href='styles/swal-forms.css', rel='stylesheet')
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     link(href='styles/materialize.css', type='text/css', rel='stylesheet', media='screen,projection')
     link(href='styles/style.css', type='text/css', rel='stylesheet', media='screen,projection')
@@ -18,7 +22,7 @@ html(lang='en')
     #login.modal.bottom-sheet
       .modal-content
         h5.header.center.teal-text.text-lighten-2 Login
-        form.col.s12
+        form#myformlogin.col.s12(role="form", action="auth/local", method="post")
           .row
             .input-field.col.s3.offset-s4
               i.material-icons.prefix email
@@ -30,43 +34,32 @@ html(lang='en')
               input#password.validate(type='password')
               label(for='password') Password
             div
-              a.modal-action.modal-close.waves-effect.waves-light.btn(href='#!') Login
+              a.modal-action.modal-close.waves-effect.waves-light.btn(onclick="document.getElementById('myformlogin').submit()") Login
     // Modal Signup Structure
     #signup.modal.bottom-sheet
       .modal-content
         h5.header.center.teal-text.text-lighten-2 Sign Up
         .row
-          form.col.s12
+          form#myformRegister.col.s12(role="form", action="auth/local/register", method="post")
             .row
               .input-field.col.s4
-                input#first_name.validate(placeholder='Placeholder', type='text')
-                label(for='first_name') First Name
-              .input-field.col.s4
-                input#last_name.validate(type='text')
-                label(for='last_name') Last Name
+                input#first_name.validate(placeholder='Placeholder', type='text', name="username")
+                label(for='first_name') Username
             .row
               .input-field.col.s4
-                input#email.validate(type='email')
+                input#email.validate(type='email', name= 'email')
                 label(for='email') Email
               .input-field.col.s4
-                input#password.validate(type='password')
+                input#password.validate(type='password', name = 'password')
                 label(for='password') Password
               .col.s4
-                a.modal-action.modal-close.waves-effect.waves-light.btn(href='#!') Sign Up
+                a.modal-action.modal-close.waves-effect.waves-light.btn(onclick="document.getElementById('myformRegister').submit()") Sign Up
     .navbar-fixed
       // Nav Menu
       nav.grey.darken-2(role='navigation')
         .nav-wrapper
           a#logo-container.brand-logo.roboto-bold.cyan-text.text-accent-4(href='#') DawChart
-          ul.right.hide-on-med-and-down
-            // Modal trigger Login - Sign Up
-            a.waves-effect.cyan-text.text-accent-4.btn-flat.modal-trigger(href='#login') Login
-            a.waves-effect.cyan-text.text-accent-4.btn-flat.modal-trigger(href='#signup') Sign Up
-          ul#nav-mobile.side-nav
-            li
-              a(href='#') Log in
-            li
-              a(href='#') Sign Up
+
           a.button-collapse(href='#', data-activates='nav-mobile')
             i.material-icons menu
     #index-banner.parallax-container
@@ -79,7 +72,7 @@ html(lang='en')
             h5.header.col.s12.light
               | With DrawChart you can draw beautiful charts in colaboration with your partners in real-time
           .row.center
-            a#download-button.btn-large.waves-effect.waves-light.teal.lighten-1(href='http://materializecss.com/getting-started.html') Get Started
+            a#download-button.btn-large.waves-effect.waves-light.teal.lighten-1(href="/login") Get Started
           br
           br
       .parallax
