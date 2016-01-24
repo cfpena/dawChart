@@ -55,7 +55,10 @@ module.exports.routes = {
     view: 'dashboard'
   },
 
-  '/users' : 'UserController.list',
+  '/getUserId' : 'DiagramController.get_user',
+
+  '/saveDiagram': 'DiagramController.saveDiagram',
+  '/loadDiagram' : 'DiagramController.loadDiagram',
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

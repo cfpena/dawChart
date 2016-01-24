@@ -50,7 +50,7 @@ module.exports.policies = {
 	// }
 
   '*': ['passport', 'sessionAuth'],
-
+  '/test': false,
   'auth': {
      '*': ['passport']
    }

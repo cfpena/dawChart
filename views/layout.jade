@@ -9,12 +9,17 @@ head
   //JavaScript
   script( src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
   script( src = "js/dashboard.js")
-  script( src = "js/materialize.js")
   script( src = "js/init.js")
+  script( src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js")
+
+
+
+            
   block scripts
 
 
   //css
+  link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css")
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
   link(href="style/materialize.css", type="text/css", rel="stylesheet", media="screen,projection")
   link(href="style/style.css", type="text/css", rel="stylesheet", media="screen,projection")
@@ -37,7 +42,7 @@ head
       li
         a(href="#") New..
       li
-        a(href="#") Load..
+        a#load(href="#") Load..
       li
         a#save(href="#") Save
       li

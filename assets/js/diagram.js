@@ -1,103 +1,218 @@
 $(document).ready(function(){
 
 
-      $("#save").click(save);
-
+      $("#save").unbind('click').click(save);
+      $("#load").unbind('click').click(load);
   });
 
-function save(){
-  alert(JSON.stringify(graph.toJSON()));
+function save(event){
 
+  var name = prompt(" Ingrese el nombre del diagrama");
+  $.post(
+    '/saveDiagram',
+    {name: name, diagram: graph.toJSON()},
+    function () {
+      alert("Se guardo correctamente");
+    }
+  ).fail(function(res){
+    alert("Error: " + res.getResponseHeader("error"));
+  });
 }
 
+function load(){
+
+  $.post(
+    '/loadDiagram',
+    {name: "test"},
+    function (res) {
+      graph.clear();
+      graph.fromJSON(res);
+
+    }
+  ).fail(function(res){
+    alert("Error: " + res.getResponseHeader("error"));
+  });
+
+
+
+}
 
 var graph = new joint.dia.Graph();
 
 var paper = new joint.dia.Paper({
     el: $('#drawContainer'),
-    width: $(window).width() -6,
-    height: $(window).height() - 6,
+    width: 800,
+    height: 600,
     gridSize: 1,
     model: graph
 });
 
-// Create a custom element.
-// ------------------------
 
-joint.shapes.html = {};
-joint.shapes.html.Element = joint.shapes.basic.Rect.extend({
-    defaults: joint.util.deepSupplement({
-        type: 'html.Element',
+var uml = joint.shapes.uml;
+
+var classes = {
+
+    mammal: new uml.Interface({
+        position: { x:300  , y: 50 },
+        size: { width: 240, height: 100 },
+        name: 'Mammal',
+        attributes: ['dob: Date'],
+        methods: ['+ setDateOfBirth(dob: Date): Void','+ getAgeAsDays(): Numeric'],
         attrs: {
-            rect: { stroke: 'none', 'fill-opacity': 0 }
+            '.uml-class-name-rect': {
+                fill: '#feb662',
+                stroke: '#ffffff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#fdc886',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-text': {
+                ref: '.uml-class-attrs-rect',
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            },
+            '.uml-class-methods-text': {
+                ref: '.uml-class-methods-rect',
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            }
+
         }
-    }, joint.shapes.basic.Rect.prototype.defaults)
-});
+    }),
 
-// Create a custom view for that element that displays an HTML div above it.
-// -------------------------------------------------------------------------
+    person: new uml.Abstract({
+        position: { x:300  , y: 300 },
+        size: { width: 260, height: 100 },
+        name: 'Person',
+        attributes: ['firstName: String','lastName: String'],
+        methods: ['+ setName(first: String, last: String): Void','+ getName(): String'],
+        attrs: {
+            '.uml-class-name-rect': {
+                fill: '#68ddd5',
+                stroke: '#ffffff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#9687fe',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-methods-text, .uml-class-attrs-text': {
+                fill: '#fff'
+            }
+        }
+    }),
 
-joint.shapes.html.ElementView = joint.dia.ElementView.extend({
+    bloodgroup: new uml.Class({
+        position: { x:20  , y: 190 },
+        size: { width: 220, height: 100 },
+        name: 'BloodGroup',
+        attributes: ['bloodGroup: String'],
+        methods: ['+ isCompatible(bG: String): Boolean'],
+        attrs: {
+            '.uml-class-name-rect': {
+                fill: '#ff8450',
+                stroke: '#fff',
+                'stroke-width': 0.5,
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#fe976a',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-text': {
+                ref: '.uml-class-attrs-rect',
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            },
+            '.uml-class-methods-text': {
+                ref: '.uml-class-methods-rect',
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            }
+        }
+    }),
 
-    template: [
-        '<div class="html-element">',
-        '<button class="delete">x</button>',
-        '<label class="title"></label>',
-        '<span></span>', '<br/>',
-        '</div>'
-    ].join(''),
+    address: new uml.Class({
+        position: { x:630  , y: 190 },
+        size: { width: 160, height: 100 },
+        name: 'Address',
+        attributes: ['houseNumber: Integer','streetName: String','town: String','postcode: String'],
+        methods: [],
+        attrs: {
+            '.uml-class-name-rect': {
+                fill: '#ff8450',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#fe976a',
+                stroke: '#fff',
+                'stroke-width': 0.5,
+            },
+            '.uml-class-attrs-text': {
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            }
+        },
 
-    initialize: function() {
-        _.bindAll(this, 'updateBox');
-        joint.dia.ElementView.prototype.initialize.apply(this, arguments);
+    }),
 
-        this.$box = $(_.template(this.template)());
-        // Prevent paper from handling pointerdown.
-        //this.$box.find('input,select').on('mousedown click', function(evt) { evt.stopPropagation(); });
-        // This is an example of reacting on the input change and storing the input data in the cell model.
-        /*this.$box.find('input').on('change', _.bind(function(evt) {
-            this.model.set('input', $(evt.target).val());
-        }, this));
-        this.$box.find('select').on('change', _.bind(function(evt) {
-            this.model.set('select', $(evt.target).val());
-        }, this));
-        this.$box.find('select').val(this.model.get('select'));*/
-        this.$box.find('.delete').on('click', _.bind(this.model.remove, this.model));
-        // Update the box position whnever the underlying model changes.
-        this.model.on('change', this.updateBox, this);
-        // Remove the box when the model gets removed from the graph.
-        this.model.on('remove', this.removeBox, this);
+    man: new uml.Class({
+        position: { x:200  , y: 500 },
+        size: { width: 180, height: 50 },
+        name: 'Man',
+        attrs: {
+            '.uml-class-name-rect': {
+                fill: '#ff8450',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#fe976a',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            }
+        }
+    }),
 
-        this.updateBox();
-    },
-    render: function() {
-        joint.dia.ElementView.prototype.render.apply(this, arguments);
-        this.paper.$el.prepend(this.$box);
-        this.updateBox();
-        return this;
-    },
-    updateBox: function() {
-        // Set the position and dimension of the box so that it covers the JointJS element.
-        var bbox = this.model.getBBox();
-        // Example of updating the HTML with a data stored in the cell model.
-        this.$box.find('label').text(this.model.get('label'));
-        //this.$box.find('span').text(this.model.get('select'));
-        this.$box.css({ width: bbox.width, height: bbox.height, left: bbox.x, top: bbox.y, transform: 'rotate(' + (this.model.get('angle') || 0) + 'deg)' });
-    },
-    removeBox: function(evt) {
-        this.$box.remove();
-    }
-});
+    woman: new uml.Class({
+        position: { x:450  , y: 500 },
+        size: { width: 180, height: 50 },
+        name: 'Woman',
+        methods: ['+ giveABrith(): Person []'],
+        attrs: {
+            '.uml-class-name-rect': {
+                fill: '#ff8450',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-attrs-rect, .uml-class-methods-rect': {
+                fill: '#fe976a',
+                stroke: '#fff',
+                'stroke-width': 0.5
+            },
+            '.uml-class-methods-text': {
+                'ref-y': 0.5,
+                'y-alignment': 'middle'
+            }
+        }
+    })
 
-// Create JointJS elements and add them to the graph as usual.
-// -----------------------------------------------------------
 
-var el1 = new joint.shapes.html.Element({ position: { x: 80, y: 80 }, size: { width: 170, height: 100 }, label: 'I am HTML', select: 'one' });
-var el2 = new joint.shapes.html.Element({ position: { x: 370, y: 160 }, size: { width: 170, height: 100 }, label: 'Me too', select: 'two' });
-var l = new joint.dia.Link({
-    source: { id: el1.id },
-    target: { id: el2.id },
-    attrs: { '.connection': { 'stroke-width': 5, stroke: '#34495E' } }
-});
+};
 
-graph.addCells([el1, el2, l]);
+_.each(classes, function(c) { graph.addCell(c); });
+
+var relations = [
+    new uml.Generalization({ source: { id: classes.man.id }, target: { id: classes.person.id }}),
+    new uml.Generalization({ source: { id: classes.woman.id }, target: { id: classes.person.id }}),
+    new uml.Implementation({ source: { id: classes.person.id }, target: { id: classes.mammal.id }}),
+    new uml.Aggregation({ source: { id: classes.person.id }, target: { id: classes.address.id }}),
+    new uml.Composition({ source: { id: classes.person.id }, target: { id: classes.bloodgroup.id }})
+];
+
+_.each(relations, function(r) { graph.addCell(r); });
