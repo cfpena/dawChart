@@ -1,0 +1,91 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='HandheldFriendly', content='True')
+    meta(name='MobileOptimized', content='320')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(http-equiv='cleartype', content='on')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no')
+    title DawChart
+    // Include JQM and JQ
+    link(rel='stylesheet', href='styles/themes/jqmfb.min.css')
+    link(rel='stylesheet', href='http://code.jquery.com/mobile/latest/jquery.mobile.structure.min.css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js')
+    script(src='js/jquery.animate-enhanced.min.js')
+    // JQM globals you can edit or remove file entirely... note it needs to be loaded before jquerymobile js
+    script(src='js/jqm.globals.js')
+    script(src='http://code.jquery.com/mobile/latest/jquery.mobile.min.js')
+    // JQM SlideMenu
+    link(rel='stylesheet', href='styles/jqm.slidemenu.css')
+    script(src='js/jqm.slidemenu.js')
+    script(src='js/svg.js')
+    script(src='js/miniatura.js')
+    script(src='js/dashboard.js')
+    script(src='js/lodash.min.js')
+    script(src='js/backbone-min.js')
+  body
+    #slidemenu
+      #profile
+        img#imgProfile(src='images/user.png')
+        .profile_info
+          strong User
+          br
+          small correo@mail.com	
+      h3 MENU
+      ul
+        li
+          a(href='#main_page')
+            img(src='images/smico3.png')
+            | Principal
+        li
+          a(href='#another_page')
+            img(src='images/smico2.png')
+            | Crear Diagrama
+        li
+          a(href='#another_page2')
+            img(src='images/smico5.png')
+            | Invitar Amigo
+        li
+          a(href='#another_page3')
+            img(src='images/smico6.png')
+            | Configuraciones
+        li
+          a(href='#another_page4')
+            img(src='images/smico4.png')
+            | Ayuda
+    #main_page(data-role='page', data-theme='a')
+      div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
+        a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
+        h1 Diagramas Entidad-Relación
+      #DiagramsContainers.container
+        br
+        each item in diagram
+          .row(id=item.name, onclick='load(this.id)')
+            .diagramas.panel.panel-default.col-sm-3.box
+              .panel-heading
+                h3(class="panel-title text-center")=item.name
+              .panel-body
+                img#cargar.imgPanel(src='images/diagrama1.PNG', align='middle')
+    
+    #another_page(data-role='page', data-theme='a')
+      div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
+        a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
+        h1 Crear Diagrama
+      .embed-responsive.embed-responsive-16by9
+        object(type='text/html', data='workarea.html', style='width:100%; height:100%')
+    #another_page2(data-role='page', data-theme='a')
+      div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
+        a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
+        h1 Invitar Amigos
+    #another_page3(data-role='page', data-theme='a')
+      div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
+        a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
+        h1 Configuraciones
+    #another_page4(data-role='page', data-theme='a')
+      div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
+        a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
+        h1 Ayuda

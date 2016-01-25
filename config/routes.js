@@ -59,6 +59,7 @@ module.exports.routes = {
   '/loadDiagram' : 'DiagramController.loadDiagram',
   '/diagramList' : 'DiagramController.list',
   '/load' : 'DiagramController.load',
+  '/principal': 'DiagramController.principal'
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

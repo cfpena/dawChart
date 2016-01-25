@@ -11,6 +11,16 @@ module.exports = {
     }
   },
 
+  principal: function(req, res){
+    if (req.session.authenticated){
+      Diagram.find().populateAll().exec(function(err, diagram) {
+           return res.view('principal',{diagram : diagram });
+      });
+    }else{
+      res.redirect('/login');
+    }
+  },
+
   get_user: function(req, res) {
     console.log(req.user.id);
     res.send(req.user.id);
