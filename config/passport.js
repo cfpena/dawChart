@@ -50,7 +50,9 @@ module.exports.passport = {
     options: {
       clientID: '892603514191908',
       clientSecret: '7fd8ddf27151bb9cc44d05da3fb30c52',
-      scope:['email']
+      callbackURL: "http://localhost:1337/auth/facebook/callback",
+      profileFields: ['id', 'emails', 'name'],
+      scope : ['email']
        /* email is necessary for login behavior */
     }
   },

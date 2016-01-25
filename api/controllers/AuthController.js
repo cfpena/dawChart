@@ -38,7 +38,6 @@ var AuthController = {
       // Get a list of available providers for use in your templates.
       Object.keys(strategies).forEach(function (key) {
         if (key === 'local') {
-
           return;
         }
 
@@ -54,7 +53,7 @@ var AuthController = {
       , errors    : req.flash('error')
       });
     }else{
-      res.redirect('/workarea');
+      res.redirect('/dashboard');
     }
   },
 
@@ -177,7 +176,7 @@ var AuthController = {
 
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        res.redirect('/');
+        res.redirect('/dashboard');
       });
     });
   },
@@ -209,7 +208,7 @@ var AuthController = {
             req.session.authenticated = true
             return res.redirect('/');
           }else{
-            alert("Error");
+            console.log("Error");
           }
           // return res.json({resultado: result});
         });

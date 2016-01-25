@@ -2,9 +2,13 @@
 module.exports = {
 
   list: function(req, res){
-    Diagram.find().populateAll().exec(function(err, diagram) {
-         return res.view('dashboard',{diagram : diagram });
-    });
+    if (req.session.authenticated){
+      Diagram.find().populateAll().exec(function(err, diagram) {
+           return res.view('dashboard',{diagram : diagram });
+      });
+    }else{
+      res.redirect('/login');
+    }
   },
 
   get_user: function(req, res) {
@@ -14,25 +18,33 @@ module.exports = {
 
   saveDiagram: function(req,res){
     Diagram.create({name: req.param("name"), diagram: req.param("diagram"), owner : req.user.id}).exec(function createCB(err, created){
-  console.log('Created');
-  res.send("exito");
-});
-},
+      console.log('Created');
+      res.send("exito");
+    });
+  },
 
   loadDiagram: function(req,res){
     Diagram.findOne({name : req.cookies.diagram}).exec(function findOneCB(err, found){
       console.log(req.cookies.diagram)
       res.send(found.diagram)
-  console.log('We found '+found.name);
-});
-},
-load: function(req,res){
+      console.log('We found '+found.name);
+    });
+  },
+  load: function(req,res){
     if(req.param("id")!='undefined'){
-    res.clearCookie('name', { path: '/dashboard' });
-    res.cookie('diagram',req.param("id"));
-    console.log(req.param("id"));
-    console.log(req.cookies.diagram);
-    res.send('ok');
+      res.clearCookie('name', { path: '/dashboard' });
+      res.cookie('diagram',req.param("id"));
+      console.log(req.param("id"));
+      console.log(req.cookies.diagram);
+      res.send('ok');
+    }
+  },
+
+  loadworkarea: function(req, res){
+    if (req.session.authenticated){
+      res.redirect('/workarea');
+    }else{
+      res.redirect('/login');
+    }
   }
-},
 }

@@ -30,13 +30,12 @@ head
     //Dropdown Profile
     ul#profile.dropdown-content
       li
-        a(href="#") Dashboard
+        a(href="/workarea") Dashboard
       li
         a(href="#") Profile
       li.divider
       li
-        form#myformLogout(role="form", action="logout", method="get")
-          a(onclick="document.getElementById('myformLogout').submit()") Logout
+        a(href="/logout") Logout
 
     //Dropdown Edit
     ul#edit.dropdown-content
