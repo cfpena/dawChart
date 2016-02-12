@@ -2,11 +2,15 @@ extends ./layout.jade
 
 block scripts
   // JavaScript
+  
   script(src='js/workarea.js')
   script(src='js/lodash.min.js')
   script(src='js/backbone-min.js')
   script(src='js/joint.min.js')
+  script(src='js/area.js')
+  script(src='js/sweet-alert.js')
   script(src='js/diagram.js')
+  
 
 block styles
   // CSS
@@ -15,7 +19,8 @@ block styles
   link(href='styles/style.css', type='text/css', rel='stylesheet', media='screen,projection')
   link(rel='stylesheet', type='text/css', href='styles/joint.min.css')
   link(rel='stylesheet', type='text/css', href='styles/diagram.css')
-
+  link(rel='stylesheet', type='text/css', href='styles/sweet-alert.css')
+  
 block content
   .navbar-fixed
     nav.lime.lighten-2.z-depth-3
@@ -43,14 +48,14 @@ block content
     
         // Diagramas container
     #drawContainer
-      script(src='js/diagram.js')
+      script(src='js/area.js')    
     // Tool Menu
     .fixed-action-btn.horizontal(style='bottom: 45px; right: 24px;')
       a.btn-floating.btn-large.red
         i.large.material-icons mode_edit
       ul
         li
-          a.btn-floating.red
+          a#item1.btn-floating.red
             i.material-icons payment
         li
           a.btn-floating.yellow.darken-1

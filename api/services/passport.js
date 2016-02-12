@@ -89,12 +89,19 @@ passport.connect = function (req, query, profile, next) {
     user.username = profile.username;
   }
 
+
+
+
   // If neither an email or a username was available in the profile, we don't
   // have a way of identifying the user in the future. Throw an error and let
   // whoever's next in the line take care of it.
   if (!user.username && !user.email) {
     return next(new Error('Neither a username nor email was available'));
   }
+
+  //if(profile.displayName==null){
+  user.name = profile.displayName;
+  user.picture = profile.cover;
 
   Passport.findOne({
     provider   : provider

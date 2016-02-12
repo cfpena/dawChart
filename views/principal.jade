@@ -61,11 +61,11 @@ html(lang='en')
       div(data-role='header', data-position='fixed', data-tap-toggle='false', data-update-page-padding='false')
         a(href='#', data-slidemenu='#slidemenu', data-slideopen='false', data-icon='smico', data-corners='false', data-iconpos='notext') Menu
         h1 Diagramas Entidad-Relación
+      br
       #DiagramsContainers.container
-        br
-        each item in diagram
-          .row(id=item.name, onclick='load(this.id)')
-            .diagramas.panel.panel-default.col-sm-3.box
+        .row
+          each item in diagram
+            .diagramas.panel.panel-default.col-sm-3.box(id=item.name, onclick='load(this.id)')
               .panel-heading
                 h3(class="panel-title text-center")=item.name
               .panel-body

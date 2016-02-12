@@ -176,7 +176,7 @@ var AuthController = {
 
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        res.redirect('/dashboard');
+        res.redirect('/principal');
       });
     });
   },
@@ -206,7 +206,7 @@ var AuthController = {
           console.log(result.autenticacionResult);
           if (result.autenticacionResult){
             req.session.authenticated = true
-            return res.redirect('/');
+            return res.redirect('/principal');
           }else{
             console.log("Error");
           }

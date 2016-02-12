@@ -4,12 +4,14 @@ var User = {
 
   attributes: {
     id: {
-    type: 'integer',
-    primaryKey: true,
-    autoIncrement: true
-},
+      type: 'integer',
+      primaryKey: true,
+      autoIncrement: true
+    },
     username  : { type: 'string', unique: true,},
     email     : { type: 'email',  unique: true },
+    name      : { type: 'string'},
+    picture   : { type: 'string'},
     passports : { collection: 'Passport', via: 'user' },
     diagrams  : { collection: 'Diagram', via: 'owner' }
   }
